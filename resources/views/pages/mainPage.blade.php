@@ -1,20 +1,17 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Демо Bootstrap</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-</head>
-    <body>
-        <div class="container">
-            <h3>Статьи</h3>
-            <ul>
-                @foreach($articles as $article)
-                    <li>{{$article->title}}</li>
-                @endforeach
-            </ul>
+@extends('template')
+@section('content')
+    @foreach($articles as $article)
+        <!-- Post preview-->
+        <div class="post-preview">
+            <a href="/article/{{$article->id}}">
+                <h2 class="post-title">{{$article->title}}</h2>
+                <h3 class="post-subtitle">{{$article->content}}</h3>
+            </a>
+            <p class="post-meta">
+                Автор: {{$article->author}}
+            </p>
         </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    </body>
-</html>
+        <!-- Divider-->
+        <hr class="my-4" />
+    @endforeach
+@endsection

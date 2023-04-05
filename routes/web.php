@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,19 +24,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('/addArticle', function (){
-   return view('pages.addArticle');
-});
-Route::post('/addArticle', function (\Illuminate\Http\Request $request){
-    $title = $request->title;
-    $content = $request->contentField;
-    $author = $request->author;
-    $article = new \App\Models\Article();
-    $article->title = $title; // Подготавливаем данные для столбца title
-    $article->content = $content; // Подготавливаем данные для столбца content
-    $article->author = $author; // Подготавливаем данные для столбца author
-    $article->save(); // Сохраняем данные в таблицу articles
-    return "Статья добавлена";
-});
+Route::view('/addArticle', 'pages.addArticle');
+Route::post('/addArticle', [ArticleController::class, 'addArticle']);
+Route::get('/article/{id}', [ArticleController::class, 'showArticle']);
+Route::post('/addComment', [ArticleController::class, 'addComment']);
 
 require __DIR__.'/auth.php';
