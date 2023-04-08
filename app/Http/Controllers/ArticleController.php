@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -22,13 +23,18 @@ class ArticleController extends Controller
     public function showArticle(Request $request){
         $id = $request->id;
         $article = Article::where('id', $id)->first();
-        $comments = Comment::where('articleId', $id)->get(); // Возвращается массив(коллекция)
+        $comments = Comment::where('article_id', $id)->get(); // Возвращается массив(коллекция)
+        foreach ($comments as $comment){
+            $userId = $comment->user_id;
+            $user = User::where('id', $userId)->first();
+            $comment->username = $user->name;
+        }
         return view('pages.article', ['article'=>$article, 'comments'=>$comments]);
     }
     public function addComment(Request $request){
         $commentField = $request->comment;
         $articleId = $request->articleId;
-        $userId = auth()->user()->getAuthIdentifier();
+        $userId = auth()->user()->getAuthIdentifier(); // auth()->user() - это авторизованный пользователь
         $comment = new Comment();
         $comment->comment = $commentField;
         $comment->article_id = $articleId;
