@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,5 +29,8 @@ Route::view('/addArticle', 'pages.addArticle');
 Route::post('/addArticle', [ArticleController::class, 'addArticle']);
 Route::get('/article/{id}', [ArticleController::class, 'showArticle']);
 Route::post('/addComment', [ArticleController::class, 'addComment']);
+Route::get('/profile', function (){return view('pages.profile');});
+Route::post('/changeAvatar', [UserController::class, 'changeAvatar']);
+Route::post('/changeUserData', [UserController::class, 'changeUserData']);
 
 require __DIR__.'/auth.php';
