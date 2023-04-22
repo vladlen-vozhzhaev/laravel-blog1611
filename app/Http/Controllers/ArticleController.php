@@ -42,4 +42,10 @@ class ArticleController extends Controller
         $comment->save();
         return redirect()->intended('/article/'.$articleId);
     }
+    public function deleteComment(Request $request){
+        $commentId = $request->id;
+        $comment = Comment::where('id', $commentId)->first();
+        $comment->delete();
+        return 'Комментарий удалён';
+    }
 }

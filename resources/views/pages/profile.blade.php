@@ -1,4 +1,5 @@
 @extends('template')
+@section('title', 'Профиль')
 @section('content')
     <style>
         #nameChangeBtn, #lastNameChangeBtn, #nameSaveBtn, #lastNameChangeBtn{
@@ -9,7 +10,6 @@
             color: #006a81;
         }
     </style>
-    <h1>Профиль</h1>
     <div class="row">
         <div class="col-4">
             <img width="90%" src="{{auth()->user()->img}}" alt="">
@@ -33,6 +33,9 @@
                 <span id="lastNameSaveBtn" hidden onclick="saveData('lastNameSpan')">[сохранить]</span>
             </p>
             <p><strong>E-mail: </strong> {{auth()->user()->email}}</p>
+            <p>
+                <a href="/addArticle" class="btn-primary btn">Добавить статью</a>
+            </p>
         </div>
     </div>
     <script>

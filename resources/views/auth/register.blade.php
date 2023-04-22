@@ -1,6 +1,15 @@
 @extends('template')
+@section('title', "Регистрация на сайте")
 @section('content')
-    <h1 class="text-center">Регистрация на сайте</h1>
+    @if($errors->any())
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="col-md-12 mx-auto">
         <form action="/register" method="post">
             @csrf
