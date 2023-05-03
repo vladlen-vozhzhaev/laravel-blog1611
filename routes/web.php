@@ -37,7 +37,7 @@ Route::view('/addArticle', 'pages.addArticle')->middleware(['auth']);
 Route::post('/addArticle', [ArticleController::class, 'addArticle'])->middleware(['auth']);
 Route::get('/article/{id}', [ArticleController::class, 'showArticle']);
 Route::post('/addComment', [ArticleController::class, 'addComment'])->middleware(['auth']);
-Route::get('/profile', function (){return view('pages.profile');})->middleware(['auth']);
+Route::get('/profile', function (){return view('pages.profile');})->middleware(['verified']);
 Route::post('/changeAvatar', [UserController::class, 'changeAvatar'])->middleware(['auth']);
 Route::post('/changeUserData', [UserController::class, 'changeUserData'])->middleware(['auth']);
 Route::get('/secret', function (){
